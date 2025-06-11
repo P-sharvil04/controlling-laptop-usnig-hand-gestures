@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Arduino Script</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+            background: url('{{ url_for("static", filename="images/bg.jpg") }}');
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+            display: block;
+            margin: 0 auto; /* Center image horizontally */
+        }
+
+        td, th {
+            color: #4fa4ff;
+            font-size: 1.5rem;
+        }
+
+        .functionality {
+            font-size: 1.2rem;
+        }
+
+        .container {
+            margin-top: 30px;
+            background-color:rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            margin-bottom: 2rem
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="mt-4 mb-4">Laptop control using hand gesture</h1>
+            <button id="gestureButton" class="btn btn-primary" onclick="toggleGestures()">Start Gestures</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="align-middle">Left hand</th>
+                        <th class="align-middle">Right hand</th>
+                        <th class="align-middle">Functionality</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/left_hand_1.png') }}" alt="left hand with 1 finger up">
+                        </td>
+                        <td class="align-middle">-</td>
+                        <td class="align-middle functionality">Left</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/left_hand_2.png') }}" alt="left hand with 2 fingers up">
+                        </td>
+                        <td class="align-middle">-</td>
+                        <td class="align-middle functionality">Right</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/left_hand_3.png') }}" alt="left hand with 3 fingers up">
+                        </td>
+                        <td class="align-middle">-</td>
+                        <td class="align-middle functionality">Open Task Manager</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/left_hand_4.png') }}" alt="left hand with 4 fingers up">
+                        </td>
+                        <td class="align-middle">-</td>
+                        <td class="align-middle functionality">Show Desktop</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/left_hand_5.png') }}" alt="left hand with 5 fingers up">
+                        </td>
+                        <td class="align-middle">-</td>
+                        <td class="align-middle functionality"> Tab</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/left_hand_closed_fist.png') }}" alt="left hand closed fist">
+                        </td>
+                        <td class="align-middle">-</td>
+                        <td class="align-middle functionality">Up</td>
+                    </tr>
+                    <tr>
+                        <td  class="align-middle">-</td>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/right_hand_1.png') }}" alt="right hand with 1 finger up">
+                        </td>
+                        <td class="align-middle functionality">Take Screenshot</td>
+                    </tr>
+                    <tr>
+                        <td  class="align-middle">-</td>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/right_hand_2.png') }}" alt="right hand with 2 fingers up">
+                        </td>
+                        <td class="align-middle functionality">Volume Up</td>
+                    </tr>
+                    <tr>
+                        <td  class="align-middle">-</td>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/right_hand_3.png') }}" alt="right hand with 3 fingers up">
+                        </td>
+                        <td class="align-middle functionality">Volume Down</td>
+                    </tr>
+                    <tr>
+                        <td  class="align-middle">-</td>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/right_hand_4.png') }}" alt="right hand with 4 fingers up">
+                        </td>
+                        <td class="align-middle functionality">Close</td>
+                    </tr>
+                    <tr>
+                        <td  class="align-middle">-</td>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/right_hand_5.png') }}" alt="right hand with 5 fingers up">
+                        </td>
+                        <td class="align-middle functionality">Window + Tab</td>
+                    </tr>
+                    <tr>
+                        <td  class="align-middle">-</td>
+                        <td class="align-middle">
+                            <img src="{{ url_for('static', filename='images/right_hand_closed_fist.png') }}" alt="right hand closed fist">
+                        </td>
+                        <td class="align-middle functionality">Down</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="https://code.jqcuery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0"></script>
+
+
+    <script>
+        let gesturesRunning = false;
+    
+        function toggleGestures() {
+            gesturesRunning = !gesturesRunning;
+            const button = document.getElementById('gestureButton');
+            button.innerText = gesturesRunning ? 'Stop Gestures' : 'Start Gestures';
+    
+            if (gesturesRunning) {
+                runArduino();
+            } else {
+                stopArduino();
+            }
+        }
+    
+        function runArduino() {
+            fetch('/run_arduino')
+                .then(response => response.text())
+                .then(message => alert(message))
+                .catch(error => console.error(error));
+        }
+    
+        function stopArduino() {
+            fetch('/stop_arduino')
+                .then(response => response.text())
+                .then(message => alert(message))
+                .catch(error => console.error(error));
+        }
+    </script>
+    
+</body>
+</html>
